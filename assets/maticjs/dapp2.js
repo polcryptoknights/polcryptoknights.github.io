@@ -142,7 +142,7 @@ async function loadAccount()
          
         if(inv > 0){
             console.log('Displaying ref link..');
-            $('#my-referral').val('https://polcryptoknights.github.io/index.php?ref='+defaultAccount);
+            $('#my-referral').val('https://polcryptoknights.github.io/index.html?ref='+defaultAccount);
         }else{
             $('#my-referral').val('You will have your link after your activation.');
         }
