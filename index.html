@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$defaultAcct = "0x1a1cc24b1d4997ACB5b8aa6573b242C463c41FaD";
+	$defaultAcct = "0x4328F5508278c49854c631E38CaD72F8C89F7aE4";
 	if(!isset($_GET["ref"]))
 	{
 		$_SESSION["spAccount"] = $defaultAcct;
@@ -99,12 +99,12 @@
   .services-btn {
     display: inline-block;
     padding: 10px 20px;
-    background: linear-gradient(90deg, #7609a8, #1900ff);
+    background: linear-gradient(90deg, #30203a, #48025e);
     color: white;
     font-weight: bold;
     text-align: center;
     border-radius: 8px;
-    box-shadow: 0 0 10px #6518ad, 0 0 20px #4e234b, 0 0 30px #3f005c;
+    box-shadow: 0 0 10px #192525, 0 0 20px #3d0d74, 0 0 30px #36076b;
     transition: transform 0.2s;
     cursor: pointer;
     text-decoration: none;
@@ -112,7 +112,7 @@
 
   .services-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px #2e267e, 0 0 30px #4f0472, 0 0 40px #380b35;
+    box-shadow: 0 0 20px #291e28, 0 0 30px #243458, 0 0 40px #150885;
   }
 
   /* Neon Border Box Animation */
@@ -133,7 +133,7 @@
     left: -2px;
     width: calc(100% + 4px);
     height: calc(100% + 4px);
-    background: linear-gradient(270deg, #000000, #140b18, #6e0683);
+    background: linear-gradient(270deg, #000000, #1f1b2e, #50064b);
     background-size: 600% 600%;
     animation: neon-border 6s linear infinite;
     z-index: -1;
@@ -278,9 +278,9 @@
   </a>
 </div>
           <h4 class="title"><a href="">CryptoKnights Plan</a></h4>
-          <p class="description" align="cewter">5% Daily Forever
+          <p class="description" align="left">5% Daily Forever
             <span class="description2"></span></p>
-          <p class="description" align="center">
+          <p class="description" align="left">
             <span class="description2"></span></p>
           <p class="description" align="left">Daily ROI:
             <span class="description2">5%</span></p>
@@ -290,7 +290,7 @@
             <span class="description2"></span></p>
           <form class="form">
             <label class="form-label">Input POL Amount: </label> 
-            <input type="number" class="form-control text-center" id="txtamount1" name="txtamount1" placeholder="1">
+            <input type="number" class="form-control text-center" id="txtamount1" name="txtamount1" placeholder="5">
             <div class="box-footer">
               <a class="services-btn align-middle" id="deposit1">Stake</a>    
             </div> 
@@ -509,7 +509,7 @@
             if(	$_SESSION["spAccount"] != ''){
                 echo "spAccount = '".$_SESSION["spAccount"]."';";    
             }else{
-                echo "spAccount = '0x1a1cc24b1d4997ACB5b8aa6573b242C463c41FaD';"; 
+                echo "spAccount = '0x81556e53648640f9536A6e925DDEa65693ab562C';"; 
             }
         ?>
         
@@ -547,14 +547,14 @@
     		if(amt.val() < 1)
 			{
 				$("#txtamount1").focus();				
-				toastr.warning("Minimum is 1 MATIC!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				toastr.warning("Minimum is 1 POL!","",{"timeOut": "3000","positionClass": "toast-top-right"});
             	return false;
 			}
 			
 			if(amt.val() > 99990)
 			{
 				$("#txtamount1").focus();				
-				toastr.warning("Maximum is 99990 MATIC!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				toastr.warning("Maximum is 99990 POL!","",{"timeOut": "3000","positionClass": "toast-top-right"});
             	return false;
 			}
         /*
