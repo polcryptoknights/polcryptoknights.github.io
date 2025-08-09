@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$defaultAcct = "0x4328F5508278c49854c631E38CaD72F8C89F7aE4";
+	$defaultAcct = "0x1a1cc24b1d4997ACB5b8aa6573b242C463c41FaD";
 	if(!isset($_GET["ref"]))
 	{
 		$_SESSION["spAccount"] = $defaultAcct;
@@ -205,7 +205,7 @@
           
             <ul>
               <li><a href="https://t.me/cryptoknightsz">Telegram</a></li>
-          <li><a class="nav-link scrollto" href="https://polygonscan.com/address/0x8b85b5F207c11045821d557F450c17A215a261fC" target="_blank">Contract</a></li>
+          <li><a class="nav-link scrollto" href="https://polygonscan.com/address/0xd88699ca3c46cc1321a16C83abE3f9469d7aF927" target="_blank">Contract</a></li>
 		  <li><a class="nav-link scrollto" href="javascript:;" id="connect-wallet">Connect</a></li>
         </ul>
       </nav><!-- .navbar -->
@@ -221,7 +221,7 @@
     <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Welcome to Crypto Knights</h1>
       <h2>Stake POL Tokens - Earn 5% Daily Forever.</h2>
-	  <a href="https://polygonscan.com/address/0x8b85b5F207c11045821d557F450c17A215a261fC" class="btn-get-started">Contract</a>
+	  <a href="https://polygonscan.com/address/0xd88699ca3c46cc1321a16C83abE3f9469d7aF927" class="btn-get-started">Contract</a>
 	  <a href="https://t.me/cryptoknightsz" class="btn-get-started">Telegram</a>
     </div>
   </section><!-- End Hero Section -->
@@ -376,8 +376,8 @@
               <div class="col-lg-8 order-2 order-lg-1">
                 <h3>Invite Stats</h3>
 				<p>Contract Address: 
-				<input type="text" class="form-control" value="0x8b85b5F207c11045821d557F450c17A215a261fC">
-				<a href="https://polygonscan.com/address/0x8b85b5F207c11045821d557F450c17A215a261fC" class="waves-effect waves-light btn btn-primary mb-5" target="_blank"><i class="fa fa-check"></i> OPEN IN POLYSCAN</a>
+				<input type="text" class="form-control" value="0xd88699ca3c46cc1321a16C83abE3f9469d7aF927">
+				<a href="https://polygonscan.com/address/0xd88699ca3c46cc1321a16C83abE3f9469d7aF927" class="waves-effect waves-light btn btn-primary mb-5" target="_blank"><i class="fa fa-check"></i> OPEN IN POLYSCAN</a>
                 <p style="margin-top:5px;">Sponsor Wallet Address: <span id="sp-address"></span></p>
 			
 			
@@ -509,7 +509,7 @@
             if(	$_SESSION["spAccount"] != ''){
                 echo "spAccount = '".$_SESSION["spAccount"]."';";    
             }else{
-                echo "spAccount = '0x81556e53648640f9536A6e925DDEa65693ab562C';"; 
+                echo "spAccount = '0x1a1cc24b1d4997ACB5b8aa6573b242C463c41FaD';"; 
             }
         ?>
         

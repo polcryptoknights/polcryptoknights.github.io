@@ -1,6 +1,6 @@
 let web3;
 
-const contractAddress = "0x8b85b5F207c11045821d557F450c17A215a261fC"; //cryptoknights
+const contractAddress = "0x1a1cc24b1d4997ACB5b8aa6573b242C463c41FaD"; //cryptoknights
 
 var spAccount = "Invalid Wallet!";
 var contract;
