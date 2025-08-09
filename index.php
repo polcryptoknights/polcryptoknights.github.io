@@ -1,0 +1,696 @@
+<?php
+	session_start();
+	$defaultAcct = "0x4328F5508278c49854c631E38CaD72F8C89F7aE4";
+	if(!isset($_GET["ref"]))
+	{
+		$_SESSION["spAccount"] = $defaultAcct;
+	}elseif(empty($_GET["ref"]))
+	{
+		$_SESSION["spAccount"] = $defaultAcct;
+	}elseif($_GET["ref"] === ""){
+		$_SESSION["spAccount"] = $defaultAcct;
+	}else{
+		$_SESSION["spAccount"] = htmlspecialchars($_GET["ref"]);
+	}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>CryptoKnights - 5% Daily</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="logo.png" rel="icon">
+  <link href="logo.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/toastr.min.css" rel="stylesheet" >
+
+<!-- Bootstrap Icons (optional) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+  /* Neon Button with Running Border */
+  .services-btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    background: #0f0000;
+    color: #9c0aa6;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  
+  .services-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: linear-gradient(270deg, #3c066d, #1f0d2c, #270861);
+    background-size: 600% 600%;
+    animation: neon-button 3s linear infinite;
+    z-index: -1;
+    border-radius: 10px;
+  }
+  
+  @keyframes neon-button {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  </style>
+
+<style>
+  body {
+    background-color: #000; /* dark background to enhance neon effect */
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Neon Gradient Button */
+  .services-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #00f0ff, #ff00f0);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00f0ff, 0 0 20px #ff00f0, 0 0 30px #00f0ff;
+    transition: transform 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .services-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff00f0, 0 0 30px #00f0ff, 0 0 40px #ff00f0;
+  }
+
+  /* Neon Border Box Animation */
+  .box {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #111;
+    color: white;
+    margin-top: 50px;
+  }
+
+  .box::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: linear-gradient(270deg, #000000, #00f0ff, #ff00f0);
+    background-size: 600% 600%;
+    animation: neon-border 6s linear infinite;
+    z-index: -1;
+    border-radius: 14px;
+  }
+
+  @keyframes neon-border {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .form-control {
+    border-radius: 6px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .box-footer {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #00f0ff;
+  }
+
+  .description2 {
+    color: #ff00f0;
+    font-weight: bold;
+  }
+
+  .icon i {
+    font-size: 32px;
+    color: #00f0ff;
+  }
+
+  label.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+    text-align: left;
+  }
+</style>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div id="logo">
+        <a href="index.html"><img src="logo.png" alt=""></a>
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <!--<h1><a href="index.html">Regna</a></h1>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          
+            <ul>
+              <li><a href="https://t.me/cryptoknightsz">Telegram</a></li>
+          <li><a class="nav-link scrollto" href="https://polygonscan.com/address/0x8b85b5F207c11045821d557F450c17A215a261fC" target="_blank">Contract</a></li>
+		  <li><a class="nav-link scrollto" href="javascript:;" id="connect-wallet">Connect</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+    </div>
+    </header><!-- End Header -->
+
+    <div>
+    </div>
+    <!-- promo section end -->
+
+<!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>Welcome to Crypto Knights</h1>
+      <h2>Stake POL Tokens - Earn 5% Daily Forever.</h2>
+	  <a href="https://polygonscan.com/address/0x8b85b5F207c11045821d557F450c17A215a261fC" class="btn-get-started">Contract</a>
+	  <a href="https://t.me/cryptoknightsz" class="btn-get-started">Telegram</a>
+    </div>
+  </section><!-- End Hero Section -->
+  
+  <main id="main">
+
+
+    <!-- ======= About Section ======= -->
+    <section id="about">
+      <div class="container" data-aos="fade-up">
+        <div class="row about-container">
+
+          <div class="col-lg-6 content order-lg-1 order-2">
+			<h2 class="title">New Key Features</h2>
+			<div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="bi bi-briefcase"></i></div>
+              <h4 class="title"><a href="">Secured: </a></h4>
+              <p class="description">PolygonChain has audited and verified the CryptoKnights smart contract for complete transparency.</p>
+            </div>
+
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="150">
+              <div class="icon"><i class="bi bi-card-checklist"></i></div>
+              <h4 class="title"><a href="">Sustainable: </a></h4>
+              <p class="description">CryptoKnights powers POL in the yield industry — uniting users, miners, and investors to stake, refer, and earn 24/7 in a sustainable, decentralized ecosystem.</p>
+            </div>
+
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="bi bi-binoculars"></i></div>
+              <h4 class="title"><a href="">CryptoKnights Future Token: </a></h4>
+              <p class="description"> Staking in CryptoKnights rewards you with Knights Tokens through airdrops, which will have future use cases for trading.</p>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6 order-lg-2 order-1" data-aos="fade-left" data-aos-delay="100">
+				<div class="responsive-video">
+					<iframe src="assets/img/MaticPro3.mp4" frameborder="0" allowfullscreen></iframe>
+				</div>
+          </div>
+		  
+        </div>
+		</div>
+		</div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Services Section ======= --> 
+  <section id="services">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in">
+        <div class="box">
+          <div class="icon">
+  <a href="">
+    <img src="logo.png" alt="briefcase icon" class="icon-img">
+  </a>
+</div>
+          <h4 class="title"><a href="">CryptoKnights Plan</a></h4>
+          <p class="description" align="left">5% Daily Forever
+            <span class="description2"></span></p>
+          <p class="description" align="left">
+            <span class="description2"></span></p>
+          <p class="description" align="left">Daily ROI:
+            <span class="description2">5%</span></p>
+          <p class="description" align="left">Min. Deposit:
+            <span class="description2">1</span></p>
+          <p class="description" align="left">-No Max Deposit-
+            <span class="description2"></span></p>
+          <form class="form">
+            <label class="form-label">Input POL Amount: </label> 
+            <input type="number" class="form-control text-center" id="txtamount1" name="txtamount1" placeholder="5">
+            <div class="box-footer">
+              <a class="services-btn align-middle" id="deposit1">Stake</a>    
+            </div> 
+          </form>
+        </div>
+      </div>
+    </div>  
+  </section><!-- End Services Section -->
+
+	<!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+	    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h3 class="section-title"> PORTAL</h3>
+          <p class="section-description">Track your live withdrawable earnings and referral rewards instantly. </p>
+        </div>
+		<div class="container" data-aos="fade-up">
+
+        <ul class="nav nav-tabs row gy-4 d-flex">
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
+              <i class="bi bi-binoculars color-cyan"></i>
+              <h4>Wallet</h4>
+            </a>
+          </li><!-- End Tab 1 Nav -->
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
+              <i class="bi bi-box-seam color-indigo"></i>
+              <h4>Referral Links</h4>
+            </a>
+          </li><!-- End Tab 2 Nav -->
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
+              <i class="bi bi-brightness-high color-teal"></i>
+              <h4>Levels</h4>
+            </a>
+          </li><!-- End Tab 3 Nav -->
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
+              <i class="bi bi-command color-red"></i>
+              <h4>Transactions</h4>
+            </a>
+          </li><!-- End Tab 4 Nav -->
+
+          
+        </ul>
+
+        <div class="tab-content">
+
+          <div class="tab-pane active show" id="tab-1">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                <h3>Available to Withdraw: <span id="my-bnb">0.00 POL</span></h3>
+				<form class="form">
+    				<div class="box-footer">
+              <button type="button" class="services-btn mb-5" id="Withdraw">
+                <i class="fa fa-check"></i> Withdraw
+              </button>
+				    </div>
+					</form>
+				
+                <h4>Earnings Overview: </h4>
+                <ul>
+                  <li><i class="bi bi-check-circle-fill"></i> Your Asset: <span id="my-balance">0.00 POL</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> Total Stake: <span id="my-investments">0.00 POL</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> Staking Rewards: <span id="my-harvests">0.00 POL</span></li>
+				          <li><i class="bi bi-check-circle-fill"></i> Referral Rewards: <span id="my-drb">0.00 POL</span></li>
+				  
+                </ul>
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
+                <img src="footer.png" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 1 -->
+
+          <div class="tab-pane" id="tab-2">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1">
+                <h3>Invite Stats</h3>
+				<p>Contract Address: 
+				<input type="text" class="form-control" value="0x8b85b5F207c11045821d557F450c17A215a261fC">
+				<a href="https://polygonscan.com/address/0x8b85b5F207c11045821d557F450c17A215a261fC" class="waves-effect waves-light btn btn-primary mb-5" target="_blank"><i class="fa fa-check"></i> OPEN IN POLYSCAN</a>
+                <p style="margin-top:5px;">Sponsor Wallet Address: <span id="sp-address"></span></p>
+			
+			
+				<form class="form">
+    				<label class="form-label">Your Invite Link:</label> 
+    				<input type="text" class="form-control" id="my-referral" value="">
+    				
+    				<div class="box-footer">
+					<br>
+					<button type="button" class="waves-effect waves-light btn btn-primary mb-5" id="copy-link"><i class="fa fa-check"></i> COPY LINK</button>
+					
+					</div> 
+					</form>
+			
+				
+                </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center">
+                <img src="footer.png" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 2 -->
+
+          <div class="tab-pane" id="tab-3">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1">
+                <h3>Levels</h3>
+				<div class="col-lg-4 col-md-6">
+                <ul>
+                  <li><i class="bi bi-check-circle-fill"></i> Level 1 (5%): <span id="referralsCountAtLevel1">0</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> Level 2 (4%): <span id="referralsCountAtLevel2">0</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> Level 3 (3%): <span id="referralsCountAtLevel3">0</span></li>
+				  <li><i class="bi bi-check-circle-fill"></i> Level 4 (2%): <span id="referralsCountAtLevel4">0</span></li>
+				  <li><i class="bi bi-check-circle-fill"></i> Level 5 (1%): <span id="referralsCountAtLevel5">0</span></li>
+             
+                  <li><i class="bi bi-check-circle-fill"></i> Level 6 (1%): <span id="referralsCountAtLevel6">0</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> Level 7 (1%): <span id="referralsCountAtLevel7">0</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> Level 8 (1%): <span id="referralsCountAtLevel8">0</span></li>
+				  <li><i class="bi bi-check-circle-fill"></i> Level 9 (1%): <span id="referralsCountAtLevel9">0</span></li
+				  <li><i class="bi bi-check-circle-fill"></i> Level 10 (1%): <span id="referralsCountAtLevel0">0</span></li
+                </ul>
+				
+				</div>
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center">
+                <img src="footer.png" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 3 -->
+
+          <div class="tab-pane" id="tab-4">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1">
+                <h3>Latest Contract Transactions:</h3>
+               
+				<form class="form">
+    				<label class="form-label">Enter Contract Address: </label> 
+    				<input type="text" class="form-control" id="walletAddress" value="">
+    				
+    				<div class="box-footer">
+					<br>
+					<button type="button" class="waves-effect waves-light btn btn-primary mb-5" id="copy-link"><i class="fa fa-check"></i> SHOW</button>
+				
+					</div> 
+					</form>
+				
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center">
+                <img src="footer.png" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 4 -->
+
+          
+        </div>
+
+      </div>
+	  </div>
+    </section><!-- End Features Section -->
+
+
+
+
+ 
+  </main><!-- End #main -->
+ 
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <h5>CryptoKnights</h5> 2025
+      </div>
+      
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  
+  <script src="assets/js/toastr.min.js"></script>
+	
+  <script src="assets/maticjs/web3.js"></script>
+  <script src="assets/maticjs/abi.js"></script>
+  <script src="assets/maticjs/dapp2.js"></script>
+  
+  <script type="text/javascript">
+	$(document).ready(function()
+    {
+        
+	<?php
+            if(	$_SESSION["spAccount"] != ''){
+                echo "spAccount = '".$_SESSION["spAccount"]."';";    
+            }else{
+                echo "spAccount = '0x81556e53648640f9536A6e925DDEa65693ab562C';"; 
+            }
+        ?>
+        
+        
+        $('#sp-address').html(spAccount); 
+    
+    });
+
+	$(function() {
+     
+		
+		$('#deposit1').click(function(ev) {
+    	    var amt = $("#txtamount1");
+            
+            if(spAccount == 'Invalid Wallet!' || spAccount == '')
+            {
+                toastr.warning("Invalid Sponsor Wallet Address!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+		    }
+            
+			if(isNaN(parseFloat(amt.val().trim())))
+			{
+				$("#txtamount1").focus();
+				toastr.warning("Invalid Amount!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}	
+
+			if(amt.val() == NaN)
+			{
+				$("#txtamount1").focus();					
+				toastr.warning("Invalid Amount!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}	
+
+    		if(amt.val() < 1)
+			{
+				$("#txtamount1").focus();				
+				toastr.warning("Minimum is 1 MATIC!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+            	return false;
+			}
+			
+			if(amt.val() > 99990)
+			{
+				$("#txtamount1").focus();				
+				toastr.warning("Maximum is 99990 MATIC!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+            	return false;
+			}
+        /*
+            if(amt.val() > myBalance)
+			{
+				$("#txtamount1").focus();				
+				toastr.warning("Not enough balance!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}
+        */
+
+			deposit1();
+			ev.preventDefault();
+    	});
+    	
+    
+        $('#deposit2').click(function(ev) {
+    	    var amt = $("#txtamount2");
+            
+            if(spAccount == 'Invalid Wallet!' || spAccount == '')
+            {
+                toastr.warning("Invalid Sponsor Wallet Address!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+		    }
+            
+			if(isNaN(parseFloat(amt.val().trim())))
+			{
+				$("#txtamount2").focus();
+				toastr.warning("Invalid Amount!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}	
+
+			if(amt.val() == NaN)
+			{
+				$("#txtamount2").focus();					
+				toastr.warning("Invalid Amount!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}	
+
+    		if(amt.val() < 99991)
+			{
+				$("#txtamount2").focus();				
+				toastr.warning("Minimum is 101 POL!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+            	return false;
+			}
+        /*
+            if(amt.val() > myBalance)
+			{
+				$("#txtamount2").focus();				
+				toastr.warning("Not enough balance!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}
+        */
+			deposit2();
+			ev.preventDefault();
+    	});
+    	
+    	
+    	$('#deposit3').click(function(ev) {
+    	    var amt = $("#txtamount3");
+            
+            if(spAccount == 'Invalid Wallet!' || spAccount == '')
+            {
+                toastr.warning("Invalid Sponsor Wallet!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+		    }
+            
+			if(isNaN(parseFloat(amt.val().trim())))
+			{
+				$("#txtamount3").focus();
+				toastr.warning("Invalid Amount!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}	
+
+			if(amt.val() == NaN)
+			{
+				$("#txtamount3").focus();					
+				toastr.warning("Invalid Amount!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}	
+
+    		if(amt.val() < 999992)
+			{
+				$("#txtamount3").focus();				
+				toastr.warning("Minimum is 999992 POL!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+            	return false;
+			}
+        /*
+            if(amt.val() > myBalance)
+			{
+				$("#txtamount3").focus();				
+				toastr.warning("Not enough balance!","",{"timeOut": "3000","positionClass": "toast-top-right"});
+				return false;
+			}
+        */
+
+			deposit3();
+			ev.preventDefault();
+    	});
+    	
+		$('#Withdraw').click(function(ev) {
+		   	
+		    collectDividends();
+			
+			ev.preventDefault();
+		});
+        
+        
+        $('#copy-link').click(function(ev) {
+			copy_text($('#my-referral').val());
+			ev.preventDefault();
+	    });
+
+	});
+    
+    function copy_text(text){		
+	    // Create a dummy input to copy the string array inside it
+		var dummy = document.createElement("input");
+		// Add it to the document
+		document.body.appendChild(dummy);
+		// Set its ID
+		dummy.setAttribute("id", "dummy_id");
+		// Output the array into it
+		document.getElementById("dummy_id").value=text;
+		// Select it
+		dummy.select();		
+		document.execCommand("copy");
+		// Remove it as its not needed anymore
+		document.body.removeChild(dummy);
+		//alert('COPIED['+$('#my-referral').val()+']');
+		toastr.success($('#my-referral').html(),"",{"timeOut": "3000","positionClass": "toast-top-right"});
+		return false;
+	}
+    </script> 
+   
+
+</body>
+
+</html>
